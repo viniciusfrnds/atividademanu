@@ -1,50 +1,81 @@
-// Função para somar dois números
+document.getElementById('addTaskBtn').addEventListener('click', function () {
+    const taskInput = document.getElementById('taskInput');
+    const taskText = taskInput.value;
+
+    if (taskText === '') return; // Verifica se a tarefa está vazia
+
+    const taskList = document.getElementById('taskList');
+    const newTask = document.createElement('li');
+    newTask.textContent = taskText;
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'Remover';
+    removeButton.addEventListener('click', function () {
+        taskList.removeChild(newTask);
+    });
+
+    newTask.appendChild(removeButton);
+    taskList.appendChild(newTask);
+    taskInput.value = ''; // Limpa o campo de entrada
+});
+
+// Funções para somar, subtrair e multiplicar
 function somar(a, b) {
     return a + b;
 }
 
-// Função para subtrair dois números
 function subtrair(a, b) {
     return a - b;
 }
 
-// Função para multiplicar dois números
 function multiplicar(a, b) {
     return a * b;
 }
 
-// Exemplo de como você pode utilizar essas funções
-document.getElementById("addTaskBtn").addEventListener("click", function() {
-    const taskInput = document.getElementById("taskInput").value;
-    
-    // Aqui estou considerando que você pode digitar algo como "2 + 3" ou "4 - 1"
-    const [num1, operacao, num2] = taskInput.split(" ");
+// Função para adicionar o resultado da operação na lista
+function adicionarResultadoNaLista(operacao, resultado) {
+    const taskList = document.getElementById('taskList');
+    const newTask = document.createElement('li');
+    newTask.textContent = `${operacao} = ${resultado}`;
 
-    let resultado;
-    const a = parseFloat(num1);
-    const b = parseFloat(num2);
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'Remover';
+    removeButton.addEventListener('click', function () {
+        taskList.removeChild(newTask);
+    });
 
-    switch (operacao) {
-        case '+':
-            resultado = somar(a, b);
-            break;
-        case '-':
-            resultado = subtrair(a, b);
-            break;
-        case '*':
-            resultado = multiplicar(a, b);
-            break;
-        default:
-            resultado = "Operação inválida";
-    }
+    newTask.appendChild(removeButton);
+    taskList.appendChild(newTask);
+}
 
-    // Adiciona o resultado na lista de tarefas (só para exemplo)
-    const li = document.createElement("li");
-    li.textContent = `${taskInput} = ${resultado}`;
-    document.getElementById("taskList").appendChild(li);
+// Botões para operações matemáticas
+document.getElementById('addBtn').addEventListener('click', function () {
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
 
-    // Limpa o input após a adição
-    document.getElementById("taskInput").value = "";
+    if (isNaN(num1) || isNaN(num2)) return; // Verifica se os números são válidos
+
+    const resultado = somar(num1, num2);
+    adicionarResultadoNaLista(`${num1} + ${num2}`, resultado);
 });
 
+document.getElementById('subBtn').addEventListener('click', function () {
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
+
+    if (isNaN(num1) || isNaN(num2)) return; // Verifica se os números são válidos
+
+    const resultado = subtrair(num1, num2);
+    adicionarResultadoNaLista(`${num1} - ${num2}`, resultado);
+});
+
+document.getElementById('mulBtn').addEventListener('click', function () {
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
+
+    if (isNaN(num1) || isNaN(num2)) return; // Verifica se os números são válidos
+
+    const resultado = multiplicar(num1, num2);
+    adicionarResultadoNaLista(`${num1} * ${num2}`, resultado);
+});
 
