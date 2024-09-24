@@ -3,12 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas</title>
+    <title>Lista de Tarefas e Operações</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkred;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lista de Tarefas</h1>
+    <h1>Lista de Tarefas e Operações Matemáticas</h1>
+
+    <!-- Campo para adicionar tarefas -->
     <input type="text" id="taskInput" placeholder="Nova tarefa">
     <button id="addTaskBtn">Adicionar Tarefa</button>
+
+    <!-- Campo para operações matemáticas -->
+    <br><br>
+    <input type="number" id="num1" placeholder="Número 1">
+    <input type="number" id="num2" placeholder="Número 2">
+    <button id="addBtn">Somar</button>
+    <button id="subBtn">Subtrair</button>
+    <button id="mulBtn">Multiplicar</button>
+
+    <!-- Lista de tarefas e resultados -->
     <ul id="taskList"></ul>
 
     <script src="script.js"></script>
